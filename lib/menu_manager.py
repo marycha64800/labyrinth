@@ -8,13 +8,21 @@ class MenuManager(BaseMenu):
 
     def start(self):
 
-        print(Welcome())
-        screen = Welcome()
-        next_screen = screen.user_input(input("Choix:"))
-        while True:
-            print(next_screen)
-            next_screen = next_screen.user_input(input("Choix:"))
-            self.previous_screens = next_screen
+        current_screen = Welcome(self.screens)
+        print(current_screen)
+        self.screens.append(current_screen)
+
+        self.menu_process(current_screen.user_input(input("Choix :"), current_screen))
+
+
+    def menu_process(self, screen):
+
+        if screen is None:
+            return exit()
+
+        self.screens.append(screen)
+        print(screen)
+        return self.menu_process(screen.user_input(input("Choix"), screen))
 
 
 
