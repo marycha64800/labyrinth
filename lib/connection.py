@@ -16,7 +16,7 @@ class Connection(BaseMenu):
         self.error = ""
         self.next_screen = {
 
-            "0": self.previous_screen
+            "0": self.previous_screen,
 
         }
 

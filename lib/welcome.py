@@ -1,6 +1,6 @@
+import sys
+import pygame
 from lib.base_menu import BaseMenu
-from re import match
-
 from lib.connection import Connection
 
 
@@ -19,34 +19,23 @@ class Welcome(BaseMenu):
     def __init__(self):
 
         super().__init__()
-        self.regex = r"^[0-1]{1}$"
-        self.error = ""
-        self.next_screen = {
+        self.backgound_menu = pygame.image.load("lib/pictures/image_welcome.jpg")
 
-            "0": None,
-            "1": Connection(self),
-        }
+    def user_input(self, event_value):
 
-    def user_input(self, value):
+        for event in event_value:
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(0)
+            key = pygame.key.get_pressed()
+            print(key)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    print('ok')
+                    return Connection(self)
 
-        if match(self.regex, value) is None:
-            self.error = "Saisie incorrecte [ 0 ] ou [ 1 ] disponible  !!"
-            return self
-        else:
-            self.error = ""
-            return self.next_screen[value]
+            return None
 
-    def __str__(self):
-        return """
-        
-        0 << Quitter
-        
-        1 >> Connexion
-        
-        2 >> Nouvelle partie ( local )
-        
-        3 >> Reprendre partie en cour ( local )  
-        
-        
-        {}
-        """.format(self.error)
+
+
+
