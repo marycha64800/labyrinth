@@ -2,6 +2,7 @@ from lib.menu_manager import MenuManager
 import pygame
 
 
+
 WINDOW_HEIGHT = 900
 WINDOW_WIDTH = 1500
 FPS = 60

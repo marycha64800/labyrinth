@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 from lib.base_menu import BaseMenu
 from lib.welcome import Welcome
 
@@ -22,33 +23,26 @@ class MenuManager:
     def start(self):
 
         layer = BaseMenu()
+
         self.window.blit(layer.backgound_menu, (0, 0))
-
         pygame.display.flip()
 
-        answer = False
-        while answer is not True:
-
-            pygame.time.Clock().tick(30)
-            answer = layer.user_input(pygame.event.get())
-
-            if answer is None:
-                layer = Welcome()
-                self.window.blit(layer.backgound_menu, (0, 0))
-                answer = layer.user_input(pygame.event.get())
-
-            pygame.display.flip()
 
 
+        layer.user_input(pygame.event.wait())
 
-        self.process_menu(layer.user_input(pygame.event.get()))
-
-    def process_menu(self,next_screen):
-
-        pygame.time.Clock().tick(30)
-        self.window.blit(next_screen, (0, 0))
+        layer = Welcome()
+        self.window.blit(layer.backgound_menu, (0, 0))
         pygame.display.flip()
 
-        return self.process_menu(next_screen.user_input(pygame.event.get()))
+        self.process_menu(layer.user_input(pygame.event.wait()))
+
+    def process_menu(self, next_screen):
+
+        self.window.blit(next_screen.backgound_menu, (0, 0))
+        pygame.display.flip()
+        return self.process_menu(next_screen.user_input(pygame.event.wait()))
+
+
 
 

@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import sys
 
 
@@ -23,13 +24,15 @@ class BaseMenu:
 
     def user_input(self, event_value):
 
-        for event in event_value:
-            if event.type == pygame.QUIT:
+        while True:
+            if event_value.type == QUIT:
                 pygame.quit()
                 sys.exit(0)
-            if event.type == pygame.KEYDOWN:
+            elif event_value.type == KEYDOWN:
+                print('plop')
                 return None
-        return False
+            event_value = pygame.event.wait()
+
 
 
 
