@@ -22,6 +22,8 @@ class Connection(BaseMenu):
             if event_value.type == QUIT:
                 pygame.quit()
                 sys.exit(0)
-            elif event_value.type == KEYDOWN and event_value.key == K_0:
-                return self.previous_sreen
+            if event_value.type == KEYDOWN:
+                    if event_value.key == K_KP0 or event_value.key == K_0 or event_value.key == K_ESCAPE:
+                        return self.previous_sreen
+
             event_value = pygame.event.wait()

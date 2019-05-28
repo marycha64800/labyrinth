@@ -29,7 +29,6 @@ class BaseMenu:
                 pygame.quit()
                 sys.exit(0)
             elif event_value.type == KEYDOWN:
-                print('plop')
                 return None
             event_value = pygame.event.wait()
 

@@ -1,8 +1,10 @@
 import sys
+import os
 import pygame
 from pygame.locals import *
 from lib.base_menu import BaseMenu
 from lib.connection import Connection
+from lib.new_game import NewGame
 
 
 class Welcome(BaseMenu):
@@ -24,11 +26,13 @@ class Welcome(BaseMenu):
             if event_value.type == QUIT:
                 pygame.quit()
                 sys.exit(0)
-            elif event_value.type == KEYDOWN and event_value.key == 257:
-                print('plop')
-                return Connection(self)
             elif event_value.type == KEYDOWN:
-                print(event_value.key)
+                if event_value.key == K_KP1 or event_value.key == K_1:
+                    return Connection(self)
+                if event_value.key == K_KP2 or event_value.key == K_2:
+                    return NewGame(self)
+                if event_value.key == K_KP3 or event_value.key == K_3:
+                    return NewGame(self)
             event_value = pygame.event.wait()
 
 
